@@ -1,0 +1,26 @@
+.login-form {
+    width: 30%;
+    background-color: aqua;
+    padding: 10px;
+    margin-left: 35%;
+    margin-top: 10%;
+}
+
+.login-form .s1 {
+    text-align: center;
+    color: black;
+}
+
+.instructions {
+    background-color: aqua;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 10%;
+    padding: 10px;
+}
+
+.instructions .start-exam {
+    margin-left: 20%;
+    background-color: green;
+    color: aliceblue;
+}

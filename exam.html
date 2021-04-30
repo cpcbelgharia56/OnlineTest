@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/mystyle.css">
+    <title>Exam | Home</title>
+
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Apr 27, 2021 13:05:00").getTime();
+
+        // Update the count down every 1 second
+        /*
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in an element with id="demo"
+            document.getElementById("remaining").innerHTML = "Time Left: " + minutes + "m " + seconds + "s ";
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                window.location.href = "answer.html";
+            }
+        }, 1000);
+        */
+    </script>
+
+    <style>
+        .instructions .start-exam {
+            margin-left: 2%;
+            background-color: green;
+            color: aliceblue;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+        
+        h3 {
+            color: red;
+        }
+        
+        li {
+            font-size: 25px;
+        }
+        
+        .button-div {
+            margin-left: 35%;
+        }
+    </style>
+</head>
+
+<body onload="startExam()">
+
+    <h2 id="remaining" style="float: right;margin-top: -100px;"></h2>
+
+    <div class="instructions">
+        <h3>Question <span id="qno">1 </span>: <span id="question">Java Script is a __________ language.</span></h3>
+        <ol type="A">
+            <li><input type="radio" name="answer"><span id="op1"> Server Side</span></li>
+            <li><input type="radio" name="answer"><span id="op2">  Client Side </span></li>
+            <li><input type="radio" name="answer"><span id="op3">  Programming</span> </li>
+            <li><input type="radio" name="answer"><span id="op4">  None of these</span></li>
+        </ol>
+
+        <div class="button-div">
+            <button class="start-exam btn" id="prevbtn" onclick="prevQuestion()" style="float:left;margin-right:10px">Prev</button>
+            <button class="start-exam btn" id="nextbtn" onclick="nextQuestion()">Next</button>
+            <button class="start-exam btn" id="finishbtn" onclick="finishExam()">Final Submit</button>
+        </div>
+
+    </div>
+
+
+    <script>
+        var pos = 0;
+
+        var questions = ["A conditional expression is also called a _______________",
+            "What is a block statement in JavaScript?",
+            "The “var” and “function” are __________",
+            "The method or operator used to identify the array is __________"
+        ];
+        var op1 = ["Alternative to if-else",
+            "conditional block",
+            "Keywords",
+            "isarrayType()"
+        ];
+        var op2 = ["Immediate if",
+            "block that contains a single statement",
+            "Declaration statements",
+            "=="
+        ];
+        var op3 = ["If-then-else statement",
+            "both conditional block and a single statement",
+            "Data types",
+            "===="
+        ];
+        var op4 = ["Switch statement",
+            "block that combines multiple statements into a single compound statement",
+            "Prototypes",
+            "typeof"
+        ];
+        var ans = ["b", "d", "b", "d"];
+
+        function startExam() {
+            displayQuestions(pos);
+        }
+
+
+        function displayQuestions(pos) {
+            //clearInterval(x);
+            //window.alert("Next");
+            var time = 10;
+            document.getElementById("remaining").innerHTML = "Time Left: " + time + " sec";
+
+            let x = setInterval(function() {
+                time--;
+                document.getElementById("remaining").innerHTML = "Time Left: " + time + " sec";
+
+                if (time == 0) {
+                    clearInterval(time);
+                    pos++;
+                    displayQuestions(pos);
+                }
+            }, 1000);
+
+            if (pos == 0) {
+                document.getElementById("prevbtn").style.display = "none";
+            } else {
+                document.getElementById("prevbtn").style.display = "block";
+            }
+
+            if (pos == 3) {
+                document.getElementById("nextbtn").style.display = "none";
+            } else {
+                document.getElementById("nextbtn").style.display = "block";
+            }
+
+            if (pos == 3) {
+                document.getElementById("finishbtn").style.display = "block";
+            } else {
+                document.getElementById("finishbtn").style.display = "none";
+            }
+
+            document.getElementById("qno").innerHTML = pos + 1;
+            document.getElementById("question").innerHTML = questions[pos];
+            document.getElementById("op1").innerHTML = op1[pos];
+            document.getElementById("op2").innerHTML = op2[pos];
+            document.getElementById("op3").innerHTML = op3[pos];
+            document.getElementById("op4").innerHTML = op4[pos];
+        }
+
+        function prevQuestion() {
+            //window.alert("Prev");
+            pos--;
+            displayQuestions(pos);
+        }
+
+        let total = 0;
+
+        function nextQuestion() {
+
+            var a = "";
+            if (document.getElementById("op1").checked == true) {
+                a = "a";
+            } else if (document.getElementById("op2").checked == true) {
+                a = "b";
+            } else if (document.getElementById("op3").checked == true) {
+                a = "c";
+            } else {
+                a = "d";
+            }
+
+            if (a == ans[pos]) {
+                total++;
+            }
+
+            pos++;
+            displayQuestions(pos);
+        }
+    </script>
+
+    <script src="js/myscript.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
